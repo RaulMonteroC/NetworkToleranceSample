@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                          xmlns:cell="clr-namespace:NetworkTolerance.UI.Cells"
+                          x:Class=" NetworkTolerance.UI.Pages.DevelopersPage"
+                          NavigationPage.BackButtonTitle="Developers"
+                          x:Name="developersPage">
+
+    <ListView x:Name="developersList"
+              CachingStrategy="RecycleElement"
+              ItemsSource="{Binding Developers}"
+              BackgroundColor="LightGray"                
+              SeparatorVisibility="None"
+              HasUnevenRows="true">
+        <ListView.ItemTemplate>
+            <DataTemplate>                    
+                <cell:DeveloperCell/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    
+</ContentPage>

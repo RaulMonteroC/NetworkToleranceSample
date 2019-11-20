@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:renderedViews="clr-namespace:Sharpnado.Presentation.Forms.RenderedViews;assembly=Sharpnado.Presentation.Forms"
+             x:Class="NetworkTolerance.UI.Controls.SkillsView">
+    <renderedViews:HorizontalListView
+        x:Name="skillList"
+        ItemHeight="40"
+        ItemWidth="120"
+        SnapStyle="Center">
+        <renderedViews:HorizontalListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <Grid Padding="3,2" VerticalOptions="Center">
+                        <BoxView CornerRadius="10" VerticalOptions="Center"
+                                 BackgroundColor="Black"/>
+                        <Label Text="{Binding .}" Margin="3,0" FontSize="Small" LineBreakMode="TailTruncation"
+                               HorizontalOptions="Center" VerticalOptions="Center" TextColor="White"/>
+                    </Grid>      
+                </ViewCell>
+            </DataTemplate>
+        </renderedViews:HorizontalListView.ItemTemplate>
+    </renderedViews:HorizontalListView>
+</ContentView>

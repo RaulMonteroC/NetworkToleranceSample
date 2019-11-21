@@ -1,5 +1,8 @@
 using System;
 using System.Net.Http;
+using System.Threading.Tasks;
+using NetworkTolerance.Connectivity.HTTPClients;
+using NetworkTolerance.Connectivity.Policies;
 using NetworkTolerance.Framework.Attributes;
 using NetworkTolerance.Framework.Keys;
 using Newtonsoft.Json;
@@ -10,19 +13,20 @@ namespace NetworkTolerance.Connectivity
 {
     public class ApiService<TApi> : IApiService<TApi>
     {
-        public TApi Api { get; }
+        private readonly PolicyBuilder _policyBuilder;
+        private readonly TApi _api;
 
         public ApiService()
         {
-            Api = LoadApi();
+            _policyBuilder = new PolicyBuilder();
+            _api = LoadApi();
         }
-
+        
         private TApi LoadApi()
         {
-            var client = new HttpClient()
+            var client = new HttpClient(new LoggedHttpClientHandler())
             {
-                BaseAddress = new Uri(GetUrl()),
-                Timeout = TimeSpan.FromSeconds(AppConstants.TimeoutSeconds)
+                BaseAddress = new Uri(GetUrl())
             };
 
             var api = RestService.For<TApi>(client, new RefitSettings
@@ -41,6 +45,16 @@ namespace NetworkTolerance.Connectivity
             var urlAttribute = (UrlAttribute)Attribute.GetCustomAttribute(typeof(TApi), typeof(UrlAttribute));
 
             return urlAttribute.Url;
+        }
+
+        public async Task Call(Func<TApi, Task> apiCall)
+        {
+            await _policyBuilder.Build().ExecuteAsync(async () => await apiCall(_api));
+        }
+        
+        public async Task<TResult> Call<TResult>(Func<TApi, Task<TResult>> apiCall)
+        {
+            return await _policyBuilder.Build<TResult>().ExecuteAsync(async () => await apiCall(_api));
         }
     }
 }

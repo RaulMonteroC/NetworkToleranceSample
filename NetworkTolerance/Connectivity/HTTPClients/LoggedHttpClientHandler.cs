@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NetworkTolerance.Connectivity.HTTPClients
 {
-    internal class LoggedHttpClientHandler : AuthenticatedHttpClientHandler
+    internal class LoggedHttpClientHandler : HttpClientHandler
     {
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
             CancellationToken cancellationToken)

@@ -21,9 +21,12 @@ namespace NetworkTolerance.UI.ViewModels
 
         private async void LoadData()
         {
-            var data = await _apiService.Api.GetDevelopers();
-            
-            Developers = new ObservableCollection<Developer>(data.OrderBy(m=>m.Name));
+            var data = await _apiService.Call(t => t.GetDevelopers());
+
+            if (data != null)
+            {
+                Developers = new ObservableCollection<Developer>(data.OrderBy(m=>m.Name));    
+            }
         }
     }
 }

@@ -21,7 +21,7 @@ namespace NetworkTolerance.UI.ViewModels
 
         private async void LoadData()
         {
-            var data = await _apiService.Call(t => t.GetDevelopers());
+            var data = await _apiService.Call(t => t.GetDevelopers(), CallPriority.User);
 
             if (data != null)
             {

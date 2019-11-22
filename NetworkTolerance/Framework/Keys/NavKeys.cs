@@ -2,7 +2,7 @@ namespace NetworkTolerance.Framework.Keys
 {
     public static class NavKeys
     {
-        public static string MainPage = "MainPage";
-        public static string DevelopersPage = "DevelopersPage";
+        public static string NetworkUnavailablePage = "/NetworkUnavailablePage";
+        public static string DevelopersPage = "NavigationPage/DevelopersPage";
     }
 }

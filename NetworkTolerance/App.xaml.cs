@@ -14,7 +14,7 @@ namespace NetworkTolerance
 {
     public partial class App : PrismApplication
     {
-        public App(IPlatformInitializer platformInitializer = null)
+        public App(IPlatformInitializer platformInitializer = null) : base(platformInitializer)
         {
         }
         
@@ -29,7 +29,8 @@ namespace NetworkTolerance
         {
             containerRegistry.Register(typeof(IApiService<IDwcApi>), typeof(ApiService<IDwcApi>));
 
-            containerRegistry.RegisterForNavigation<MainPage>();
+            containerRegistry.RegisterForNavigation<NavigationPage>();
+            containerRegistry.RegisterForNavigation<NetworkUnavailablePage, NetworkUnavailableViewModel>();
             containerRegistry.RegisterForNavigation<DevelopersPage, DevelopersViewModel>();
         }
     }

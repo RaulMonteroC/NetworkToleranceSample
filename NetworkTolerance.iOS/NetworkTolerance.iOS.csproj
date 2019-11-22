@@ -64,6 +64,7 @@
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
+    <Compile Include="PlatformAPIs\iOSSettingsNavigator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,5 +134,9 @@
       <Project>{006294D4-4BAF-4715-AA5E-1AD5EDA020E7}</Project>
       <Name>NetworkTolerance</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\info_icon.png" />
+    <BundleResource Include="Resources\user_icon.png" />
   </ItemGroup>
 </Project>

@@ -1,25 +1,38 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-                          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                          xmlns:cell="clr-namespace:NetworkTolerance.UI.Cells"
-                          x:Class=" NetworkTolerance.UI.Pages.DevelopersPage"
-                          Title="Developers"
-                          NavigationPage.BackButtonTitle="Developers"
-                          x:Name="developersPage">
-    
-    <NavigationPage.HasNavigationBar>True</NavigationPage.HasNavigationBar>
 
-    <ListView x:Name="developersList"
-              CachingStrategy="RecycleElement"
-              ItemsSource="{Binding Developers}"
-              BackgroundColor="LightGray"                
-              SeparatorVisibility="None"
-              HasUnevenRows="true">
-        <ListView.ItemTemplate>
-            <DataTemplate>                    
-                <cell:DeveloperCell/>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-    </ListView>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:cell="clr-namespace:NetworkTolerance.UI.Cells"
+             xmlns:converters="clr-namespace:NetworkTolerance.UI.Converters;assembly=NetworkTolerance"
+             x:Class=" NetworkTolerance.UI.Pages.DevelopersPage"
+             x:Name="developersPage"
+             Title="Developers"
+             BackgroundColor="LightGray">
+<ContentPage.Resources>
+    <ResourceDictionary>
+        <converters:InvertBooleanConverter x:Key="InvertBooleanConverter"/>
+    </ResourceDictionary>
+</ContentPage.Resources>
+    <StackLayout>
+        
+        <ActivityIndicator IsVisible="{Binding Loading}" IsRunning="{Binding Loading}"
+                           VerticalOptions="CenterAndExpand"/>
+        
+        <ListView x:Name="developersList"
+                  IsVisible="{Binding Loading, Converter={StaticResource InvertBooleanConverter}}"
+                  CachingStrategy="RecycleElementAndDataTemplate"
+                  ItemSelected="Handle_ItemSelected"
+                  ItemsSource="{Binding Developers}"
+                  SeparatorVisibility="None"
+                  BackgroundColor="LightGray"
+                  HasUnevenRows="true">
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <cell:DeveloperCell />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
     
 </ContentPage>

@@ -9,6 +9,7 @@
 
     <pcView:PancakeView Padding="0" Margin="15,10" BackgroundColor="White"
                         HasShadow="False" CornerRadius="5">
+        
         <Grid RowSpacing="15">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -21,8 +22,10 @@
             
             <pcView:PancakeView Padding="0" Grid.RowSpan="2" HorizontalOptions="FillAndExpand"
                                 CornerRadius="0" VerticalOptions="FillAndExpand" IsClippedToBounds="True">
+                
                 <ffimageloading:CachedImage Aspect="AspectFill"
                                             DownsampleToViewSize="true"
+                                            LoadingPlaceholder="user_icon"
                                             Source="{Binding AbsoluteImageUrl}" />
             </pcView:PancakeView>
             
@@ -33,6 +36,7 @@
             
             <controls:SkillsView SkillsSource="{Binding DisplaySkills}" Grid.Row="1"
                                  Grid.Column="1" Padding="0,5,0,10" VerticalOptions="Center" />
+            
         </Grid>
     </pcView:PancakeView>
 

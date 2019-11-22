@@ -3,8 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using FFImageLoading.Forms.Platform;
 using Foundation;
+using NetworkTolerance.iOS.PlatformAPIs;
+using NetworkTolerance.PlatformAPIs;
+using Prism;
+using Prism.Ioc;
 using Sharpnado.Presentation.Forms.iOS;
 using UIKit;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.iOS;
 
 namespace NetworkTolerance.iOS
 {
@@ -26,11 +32,23 @@ namespace NetworkTolerance.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
+            UINavigationBar.Appearance.BarTintColor = Color.FromHex("#0094F7").ToUIColor();
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White });
+            UINavigationBar.Appearance.BarStyle = UIBarStyle.Black;
+
             CachedImageRenderer.Init();
             CachedImageRenderer.InitImageSourceHandler();
             SharpnadoInitializer.Initialize();
-            
+
             return base.FinishedLaunching(app, options);
+        }
+    }
+    
+    public class iOSInitializer : IPlatformInitializer
+    {
+        public void RegisterTypes(IContainerRegistry containerRegistry)
+        {
+            containerRegistry.Register<ISettingsNavigator,iOSSettingsNavigator>();
         }
     }
 }

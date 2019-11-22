@@ -7,6 +7,10 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using FFImageLoading.Forms.Platform;
+using NetworkTolerance.Droid.PlatformAPIs;
+using NetworkTolerance.PlatformAPIs;
+using Prism;
+using Prism.Ioc;
 using Sharpnado.Presentation.Forms.Droid;
 
 namespace NetworkTolerance.Droid
@@ -27,7 +31,7 @@ namespace NetworkTolerance.Droid
             CachedImageRenderer.Init(enableFastRenderer: true);
             CachedImageRenderer.InitImageViewHandler();
             SharpnadoInitializer.Initialize();
-            
+
             LoadApplication(new App());
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
@@ -36,5 +40,13 @@ namespace NetworkTolerance.Droid
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+        
+        public class AndroidInitializer : IPlatformInitializer
+        {
+            public void RegisterTypes(IContainerRegistry containerRegistry)
+            {
+                containerRegistry.Register<ISettingsNavigator,AndroidSettingsNavigator>();
+            }
+        }        
     }
 }
